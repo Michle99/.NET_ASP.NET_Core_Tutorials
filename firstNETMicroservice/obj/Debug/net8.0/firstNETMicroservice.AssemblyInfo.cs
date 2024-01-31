@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("firstNETMicroservice")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f364d1874cb447b0784c0d7ff2a61e67d87b58c4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d599c53d6894708c248b7f4abbb91d9a0d3ed49e")]
 [assembly: System.Reflection.AssemblyProductAttribute("firstNETMicroservice")]
 [assembly: System.Reflection.AssemblyTitleAttribute("firstNETMicroservice")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
