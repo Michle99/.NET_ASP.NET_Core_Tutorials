@@ -8,10 +8,10 @@ spec:
   template:
     metadata:
       labels:
-        app: mymicroservice
+        app: firstnetmicroservice
     spec:
       containers:
-      - name: mymicroservice
+      - name: firstnetmicroservice
         image: sam12302021/firstnetmicroservice:latest
         ports:
         - containerPort: 80
