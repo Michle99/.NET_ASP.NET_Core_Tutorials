@@ -1,6 +1,6 @@
 // TodoItem.cs
 
-namespace Todo;
+namespace TodoApp.Models;
 
 public class TodoItem
 {
