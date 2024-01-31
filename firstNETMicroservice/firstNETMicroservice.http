@@ -1,0 +1,6 @@
+@firstNETMicroservice_HostAddress = http://localhost:5250
+
+GET {{firstNETMicroservice_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
