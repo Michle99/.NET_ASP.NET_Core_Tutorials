@@ -14,6 +14,19 @@ public class TodoContext : DbContext
     }
     public DbSet<TodoItem> TodoItems { get; set; }
 
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowSpecificOrigins",
+            builder => builder
+                .WithOrigins("http://localhost:5291")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+            );
+        });
+    }
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         //* Connect to sqlite database
