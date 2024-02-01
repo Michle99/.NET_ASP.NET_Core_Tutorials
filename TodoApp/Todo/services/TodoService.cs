@@ -8,10 +8,10 @@ using TodoApp.Models;
 public interface ITodoService
 {
     Task<TodoItem[]> GetTodoItems();
-    Task<TodoItem> GetTodoItem(long id);
+    Task<TodoItem> GetTodoItem(int id);
     Task<TodoItem> AddTodoItem(TodoItem item);
-    Task UpdateTodoItem(long id, TodoItem item);
-    Task DeleteTodoItem(long id);
+    Task UpdateTodoItem(int id, TodoItem item);
+    Task DeleteTodoItem(int id);
 }
 
 public class TodoService : ITodoService
@@ -28,7 +28,7 @@ public class TodoService : ITodoService
         return await _httpClient.GetFromJsonAsync<TodoItem[]>("api/Todo");
     }
 
-    public async Task<TodoItem> GetTodoItem(long id)
+    public async Task<TodoItem> GetTodoItem(int id)
     {
         return await _httpClient.GetFromJsonAsync<TodoItem>($"api/Todo/{id}");
     }
@@ -39,12 +39,12 @@ public class TodoService : ITodoService
         return await response.Content.ReadFromJsonAsync<TodoItem>();
     }
 
-    public async Task UpdateTodoItem(long id, TodoItem item)
+    public async Task UpdateTodoItem(int id, TodoItem item)
     {
         await _httpClient.PutAsJsonAsync($"api/Todo/{id}", item);
     }
 
-    public async Task DeleteTodoItem(long id)
+    public async Task DeleteTodoItem(int id)
     {
         await _httpClient.DeleteAsync($"api/Todo/{id}");
     }
