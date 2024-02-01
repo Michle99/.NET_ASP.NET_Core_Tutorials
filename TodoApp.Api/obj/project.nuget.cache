@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KsvvZg4g4Cx7cUxp3Pa6UufOkddCDa0VtfaRnvBv2NBSc/6t5Tam8uypgAfJwZD/D94Uz679c5GIzK2Q7RPRdA==",
+  "dgSpecHash": "kICr0bh05HdkDLlQ0I81LAbVXE2dto6wQO8ouvjabHX6yB9i/v+d5rBze3WNnlhl4YGIJtZ2gw/Iah1PFp9VZg==",
   "success": true,
   "projectFilePath": "C:\\Users\\sammi\\Downloads\\.NET_ASP.NET_Core_Tutorials\\TodoApp.Api\\TodoApp.Api.csproj",
   "expectedPackageFiles": [
@@ -22,6 +22,7 @@
     "C:\\Users\\sammi\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.1\\microsoft.entityframeworkcore.abstractions.8.0.1.nupkg.sha512",
     "C:\\Users\\sammi\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.1\\microsoft.entityframeworkcore.analyzers.8.0.1.nupkg.sha512",
     "C:\\Users\\sammi\\.nuget\\packages\\microsoft.entityframeworkcore.design\\8.0.1\\microsoft.entityframeworkcore.design.8.0.1.nupkg.sha512",
+    "C:\\Users\\sammi\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\8.0.1\\microsoft.entityframeworkcore.inmemory.8.0.1.nupkg.sha512",
     "C:\\Users\\sammi\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.1\\microsoft.entityframeworkcore.relational.8.0.1.nupkg.sha512",
     "C:\\Users\\sammi\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\8.0.1\\microsoft.entityframeworkcore.sqlite.8.0.1.nupkg.sha512",
     "C:\\Users\\sammi\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\8.0.1\\microsoft.entityframeworkcore.sqlite.core.8.0.1.nupkg.sha512",
