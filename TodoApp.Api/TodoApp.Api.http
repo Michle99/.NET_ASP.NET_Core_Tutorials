@@ -6,4 +6,14 @@ Accept: application/json
 
 ### Post a Todo
 POST http://localhost:5141/api/todo
-Accept: 
+Content-Type: application/json
+Accept: application/json
+
+{
+    "Title": "Adding the Fourth Todo",
+    "IsCompleted": true
+}
+
+### Get a Todo by ID
+GET http://localhost:5141/api/todo/4
+Accept: application/json
