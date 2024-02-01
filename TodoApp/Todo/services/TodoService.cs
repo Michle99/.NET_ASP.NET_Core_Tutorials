@@ -27,27 +27,27 @@ public class TodoService : ITodoService
 
     public async Task<TodoItem[]> GetTodoItems()
     {
-        return await _httpClient.GetFromJsonAsync<TodoItem[]>("api/Todo");
+        return await _httpClient.GetFromJsonAsync<TodoItem[]>("api/todo");
     }
 
     public async Task<TodoItem> GetTodoItem(int id)
     {
-        return await _httpClient.GetFromJsonAsync<TodoItem>($"api/Todo/{id}");
+        return await _httpClient.GetFromJsonAsync<TodoItem>($"api/todo/{id}");
     }
 
     public async Task<TodoItem> AddTodoItem(TodoItem item)
     {
-        var response = await _httpClient.PostAsJsonAsync("api/Todo", item);
+        var response = await _httpClient.PostAsJsonAsync("api/todo", item);
         return await response.Content.ReadFromJsonAsync<TodoItem>();
     }
 
     public async Task UpdateTodoItem(int id, TodoItem item)
     {
-        await _httpClient.PutAsJsonAsync($"api/Todo/{id}", item);
+        await _httpClient.PutAsJsonAsync($"api/todo/{id}", item);
     }
 
     public async Task DeleteTodoItem(int id)
     {
-        await _httpClient.DeleteAsync($"api/Todo/{id}");
+        await _httpClient.DeleteAsync($"api/todo/{id}");
     }
 }
