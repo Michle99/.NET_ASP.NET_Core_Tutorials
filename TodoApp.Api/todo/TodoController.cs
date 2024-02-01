@@ -25,7 +25,7 @@ public class TodoController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
+    public async Task<ActionResult<TodoItem>> GetTodoItem(int id)
     {
         var todoItem = await _context.TodoItems.FindAsync(id);
 
@@ -45,7 +45,7 @@ public class TodoController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTodoItem(long id, TodoItem item)
+    public async Task<IActionResult> PutTodoItem(int id, TodoItem item)
     {
         if (id != item.Id)
             return BadRequest();
@@ -57,7 +57,7 @@ public class TodoController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteTodoItem(long id)
+    public async Task<IActionResult> DeleteTodoItem(int id)
     {
         var todoItem = await _context.TodoItems.FindAsync(id);
 
