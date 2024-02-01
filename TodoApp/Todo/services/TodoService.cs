@@ -5,6 +5,8 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using TodoApp.Models;
 
+namespace TodoApp.Service;
+
 public interface ITodoService
 {
     Task<TodoItem[]> GetTodoItems();

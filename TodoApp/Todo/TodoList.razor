@@ -1,0 +1,59 @@
+//* TodoList.razor
+@page "/todos"
+
+<h3>TODO List</h3>
+
+@if (todoItems == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in todoItems)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>@item.IsCompleted</td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => EditTodoItem(item.Id)">Edit</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteTodoItem(item.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Models.TodoItem[] todoItems;
+
+    [Inject]
+    private Service.ITodoService todoService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        todoItems = await todoService.GetTodoItems();
+    }
+
+    private void EditTodoItem(int id)
+    {
+        navigationManager.NavigateTo($"/todos/{id}");
+    }
+
+    private async void DeleteTodoItem(int id)
+    {
+        await todoService.DeleteTodoItem(id);
+        todoItems = await todoService.GetTodoItems();
+    }
+}
