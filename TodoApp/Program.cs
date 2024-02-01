@@ -11,4 +11,7 @@ builder.Services.AddScoped(sp => new HttpClient {
    }
 );
 
+//* Add Todoservice
+builder.Services.AddScoped<ITodoService, TodoService>();
+
 await builder.Build().RunAsync();
