@@ -1,4 +1,5 @@
 //* TodoList.razor
+
 @page "/todos"
 
 <h3>TODO List</h3>
@@ -36,10 +37,11 @@ else
 }
 
 @code {
-    private Models.TodoItem[] todoItems;
+    private Models.TodoItem[] todoItems = null!;
 
+    @inject NavigationManager navigationManager
     [Inject]
-    private Service.ITodoService todoService { get; set; }
+    private Service.ITodoService todoService { get; set; } = null!;
 
     protected override async Task OnInitializedAsync()
     {
