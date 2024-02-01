@@ -6,10 +6,17 @@ using TodoApp.Models;
 
 public class TodoContext : DbContext
 {
+    protected readonly IConfiguration Configuration;
+
+    public TodoContext(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
     public DbSet<TodoItem> TodoItems { get; set; }
 
-    public TodoContext(DbContextOptions<TodoContext> options)
-        : base(options)
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
+        //* Connect to sqlite database
+        options.UseSqlite(Configuration.GetConnectionString("TodoDatabase"));
     }
 }
