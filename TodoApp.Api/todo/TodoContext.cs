@@ -12,15 +12,4 @@ public class TodoContext : DbContext
         : base(options)
     {
     }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        // Specify the data type of the primary key
-        modelBuilder.Entity<TodoItem>()
-            .Property(e => e.Id)
-            .ValueGeneratedOnAdd()
-            .HasColumnType("INTEGER");
-
-        base.OnModelCreating(modelBuilder);
-    }
 }

@@ -10,8 +10,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "Title": "Adding the Fifth Todo",
-    "IsCompleted": true
+    "Title": "Adding the first Todo",
+    "IsCompleted": false
 }
 
 ### Get a Todo by ID
