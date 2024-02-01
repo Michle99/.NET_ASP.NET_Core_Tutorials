@@ -4,7 +4,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Add services to the container.
-// builder.Services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+builder.Services.AddDbContext<TodoContext>(options => 
+    options.UseSqlite(builder.Configuration.GetConnectionString("TodoDatabase"))
+);
 builder.Services.AddControllers();
 
 
