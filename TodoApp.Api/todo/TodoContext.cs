@@ -1,7 +1,6 @@
 // TodoContext.cs
 
 using Microsoft.EntityFrameworkCore;
-
 using TodoApp.Models;
 
 public class TodoContext : DbContext
@@ -17,15 +16,7 @@ public class TodoContext : DbContext
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddCors(options =>
-        {
-            options.AddPolicy("AllowSpecificOrigins",
-            builder => builder
-                .WithOrigins("http://localhost:5291")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-            );
-        });
+        services.AddCors();
     }
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {

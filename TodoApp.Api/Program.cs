@@ -7,6 +7,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TodoContext>(options => 
     options.UseSqlite(builder.Configuration.GetConnectionString("TodoDatabase"))
 );
+
+builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowSpecificOrigins",
+            builder => builder
+                .WithOrigins("http://localhost:5291")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+            );
+        }
+);
+
 builder.Services.AddControllers();
 
 
@@ -22,8 +35,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseCors("AllowSpecificOrigins");
+
 app.UseAuthorization();
 
 app.MapControllers();
