@@ -1,8 +1,6 @@
 // TodoService.cs
 
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
 using TodoApp.Models;
 
 namespace TodoApp.Service;
@@ -18,12 +16,7 @@ public interface ITodoService
 
 public class TodoService : ITodoService
 {
-    private readonly HttpClient _httpClient;
-
-    public TodoService(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
+    private List<TodoItem> todoItems = new List<TodoItem>();
 
     public async Task<TodoItem[]> GetTodoItems()
     {
