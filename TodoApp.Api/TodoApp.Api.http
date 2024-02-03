@@ -30,7 +30,6 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "Id": 3,
     "Title": "Adding the thirty-third Todo",
     "IsCompleted": true
 }

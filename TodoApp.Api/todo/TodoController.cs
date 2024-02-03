@@ -45,16 +45,24 @@ public class TodoController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTodoItem(int id, TodoItem item)
+    public async Task<IActionResult> PutTodoItem(int id, TodoItem updatedItem)
     {
-        if (id != item.Id)
-            return BadRequest();
+        var existingItem = await _context.TodoItems.FindAsync(id);
 
-        _context.Entry(item).State = EntityState.Modified;
+        if (existingItem == null)
+        {
+            return NotFound();
+        }
+
+        existingItem.Title = updatedItem.Title;
+        existingItem.IsCompleted = updatedItem.IsCompleted;
+
+        _context.TodoItems.Update(existingItem);
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        return Ok(existingItem);
     }
+    
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTodoItem(int id)

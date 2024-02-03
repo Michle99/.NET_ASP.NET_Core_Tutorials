@@ -7,40 +7,47 @@ namespace TodoApp.Service;
 
 public interface ITodoService
 {
-    Task<TodoItem[]> GetTodoItems();
-    Task<TodoItem> GetTodoItem(int id);
-    Task<TodoItem> AddTodoItem(TodoItem item);
-    Task UpdateTodoItem(int id, TodoItem item);
-    Task DeleteTodoItem(int id);
+    List<TodoItem> GetTodoItems();
+    TodoItem? GetTodoItem(int id);
+    TodoItem AddTodoItem(TodoItem item);
+    TodoItem UpdateTodoItem(TodoItem item);
+    void DeleteTodoItem(int id);
 }
 
 public class TodoService : ITodoService
 {
     private List<TodoItem> todoItems = new List<TodoItem>();
 
-    public async Task<TodoItem[]> GetTodoItems()
+    public List<TodoItem> GetTodoItems()
     {
-        return await _httpClient.GetFromJsonAsync<TodoItem[]>("api/todo");
+        return todoItems;
     }
 
-    public async Task<TodoItem> GetTodoItem(int id)
+    public TodoItem? GetTodoItem(int id)
     {
-        return await _httpClient.GetFromJsonAsync<TodoItem>($"api/todo/{id}");
+        return todoItems.Find(item => item.Id == id);
     }
 
-    public async Task<TodoItem> AddTodoItem(TodoItem item)
+    public TodoItem AddTodoItem(TodoItem item)
     {
-        var response = await _httpClient.PostAsJsonAsync("api/todo", item);
-        return await response.Content.ReadFromJsonAsync<TodoItem>();
+       item.Id = todoItems.Count + 1;
+       todoItems.Add(item);
+       return item;
     }
 
-    public async Task UpdateTodoItem(int id, TodoItem item)
+    public TodoItem UpdateTodoItem(TodoItem updatedItem)
     {
-        await _httpClient.PutAsJsonAsync($"api/todo/{id}", item);
+        var existingItem = todoItems.Find(item => item.Id == updatedItem.Id);
+        if (existingItem != null)
+        {
+            existingItem.Title = updatedItem.Title;
+            existingItem.IsCompleted = updatedItem.IsCompleted;
+        } 
+        return updatedItem;
     }
 
-    public async Task DeleteTodoItem(int id)
+    public void DeleteTodoItem(int id)
     {
-        await _httpClient.DeleteAsync($"api/todo/{id}");
+        todoItems.RemoveAll(item => item.Id == id);
     }
 }

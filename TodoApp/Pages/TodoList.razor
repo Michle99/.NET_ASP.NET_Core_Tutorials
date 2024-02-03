@@ -19,14 +19,14 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in todoItems)
+            @foreach (var item in TodoService.GetTodoItems())
             {
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Title</td>
-                    <td>@item.IsCompleted</td>
+                    <td>@(item.IsCompleted ? "Yes" : "No")</td>
                     <td>
-                        <button class="btn btn-primary" @onclick="() => EditTodoItem(item.Id)">Edit</button>
+                        <button class="btn btn-primary" @onclick="() => EditTodoItem(item)">Edit</button>
                         <button class="btn btn-danger" @onclick="() => DeleteTodoItem(item.Id)">Delete</button>
                     </td>
                 </tr>
@@ -35,26 +35,28 @@ else
     </table>
 }
 
+<button class="button" @onclick="AddTodoItem">Add New Item</button>
+
 @code {
-    private Models.TodoItem[] todoItems = null!;
+    private List<Models.TodoItem> todoItems = null!;
 
     @inject NavigationManager navigationManager
+
     [Inject]
-    private Service.ITodoService todoService { get; set; } = null!;
+    private Service.TodoService TodoService { get; set; } = null!;
 
-    protected override async Task OnInitializedAsync()
+    private void AddTodoItem()
     {
-        todoItems = await todoService.GetTodoItems();
+        navigationManager.NavigateTo("/todo/add");
     }
 
-    private void EditTodoItem(int id)
+    private void EditTodoItem(Models.TodoItem item)
     {
-        navigationManager.NavigateTo($"/todo/{id}");
+        navigationManager.NavigateTo($"/todo/{item.Id}");
     }
 
-    private async void DeleteTodoItem(int id)
+    private void DeleteTodoItem(int id)
     {
-        await todoService.DeleteTodoItem(id);
-        todoItems = await todoService.GetTodoItems();
+        TodoService.DeleteTodoItem(id);
     }
 }

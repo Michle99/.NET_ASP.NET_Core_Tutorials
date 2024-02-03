@@ -1,5 +1,30 @@
 
 @page "/todo/add"
 
-<h3>Add and Edit Form</h3>
+<!-- TodoForm.razor -->
+<h3>Add New Todo</h3>
 
+<div class="form-group">
+    <label for="title">Title:</label>
+    <input id="title" class="form-control" @bind="newTodo.Title" />
+</div>
+
+<div class="form-group">
+    <label for="completed">Completed:</label>
+    <input id="completed" type="checkbox" @bind="newTodo.IsCompleted" />
+</div>
+
+<button class="btn btn-success" @onclick="AddTodo">Add Todo</button>
+
+@code {
+    private Models.TodoItem newTodo = new Models.TodoItem();
+
+    [Parameter]
+    public EventCallback<Models.TodoItem> OnTodoAdded { get; set; }
+
+    private async Task AddTodo()
+    {
+        await OnTodoAdded.InvokeAsync(newTodo);
+        newTodo = new Models.TodoItem();
+    }
+}

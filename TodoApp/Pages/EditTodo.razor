@@ -1,0 +1,53 @@
+<!-- EditTodo.razor -->
+@page "/todo/{id}"
+
+@inject Service.TodoService TodoService
+@inject NavigationManager NavigationManager
+
+<h3>Edit Todo</h3>
+
+@if (todoItem == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div>
+        <label>Title:</label>
+        <input @bind="todoItem.Title" />
+
+        <label>Completed:</label>
+        <input type="checkbox" @bind="todoItem.IsCompleted" />
+
+        <button class="btn btn-success" @onclick="SaveChanges">Save</button>
+        <button class="btn btn-secondary" @onclick="CancelEdit">Cancel</button>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int TodoId { get; set; }
+
+    private Models.TodoItem? todoItem;
+
+    protected override void OnInitialized()
+    {
+        LoadTodoItem();
+    }
+
+    private void LoadTodoItem()
+    {
+        todoItem = TodoService.GetTodoItem(TodoId);
+    }
+
+    private async Task SaveChanges()
+    {
+        await TodoService.UpdateTodoItem(todoItem);
+        NavigationManager.NavigateTo("/todo");
+    }
+
+    private void CancelEdit()
+    {
+        NavigationManager.NavigateTo("/todo");
+    }
+}
