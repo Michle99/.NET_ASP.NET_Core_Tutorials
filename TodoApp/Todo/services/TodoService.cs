@@ -9,8 +9,8 @@ public interface ITodoService
 {
     List<TodoItem> GetTodoItems();
     TodoItem? GetTodoItem(int id);
-    TodoItem AddTodoItem(TodoItem item);
-    TodoItem UpdateTodoItem(TodoItem item);
+    Task<TodoItem> AddTodoItem(TodoItem item);
+    Task<TodoItem>  UpdateTodoItem(TodoItem item);
     void DeleteTodoItem(int id);
 }
 
@@ -28,23 +28,24 @@ public class TodoService : ITodoService
         return todoItems.Find(item => item.Id == id);
     }
 
-    public TodoItem AddTodoItem(TodoItem item)
-    {
-       item.Id = todoItems.Count + 1;
-       todoItems.Add(item);
-       return item;
-    }
-
-    public TodoItem UpdateTodoItem(TodoItem updatedItem)
-    {
-        var existingItem = todoItems.Find(item => item.Id == updatedItem.Id);
-        if (existingItem != null)
+    public async Task<TodoItem> AddTodoItem(TodoItem item)
         {
-            existingItem.Title = updatedItem.Title;
-            existingItem.IsCompleted = updatedItem.IsCompleted;
-        } 
-        return updatedItem;
-    }
+            item.Id = todoItems.Count + 1;
+            todoItems.Add(item);
+            return await Task.FromResult(item);
+        }
+
+        public async Task<TodoItem> UpdateTodoItem(TodoItem updatedItem)
+        {
+            var existingItem = todoItems.Find(item => item.Id == updatedItem.Id);
+            if (existingItem != null)
+            {
+                existingItem.Title = updatedItem.Title;
+                existingItem.IsCompleted = updatedItem.IsCompleted;
+            }
+
+            return await Task.FromResult(existingItem);
+        }
 
     public void DeleteTodoItem(int id)
     {
