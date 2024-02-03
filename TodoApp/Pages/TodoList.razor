@@ -45,6 +45,10 @@ else
     [Inject]
     private Service.TodoService TodoService { get; set; } = null!;
 
+    protected override void OnInitialized()
+    {
+        todoItems = TodoService.GetTodoItems();
+    }
     private void AddTodoItem()
     {
         navigationManager.NavigateTo("/todo/add");
@@ -58,5 +62,6 @@ else
     private void DeleteTodoItem(int id)
     {
         TodoService.DeleteTodoItem(id);
+        todoItems = TodoService.GetTodoItems();
     }
 }
