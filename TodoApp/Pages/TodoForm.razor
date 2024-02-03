@@ -1,7 +1,8 @@
 
 @page "/todo/add"
 
-<!-- TodoForm.razor -->
+@inject NavigationManager NavigationManager
+
 <h3>Add New Todo</h3>
 
 <div class="form-group">
@@ -19,12 +20,11 @@
 @code {
     private Models.TodoItem newTodo = new Models.TodoItem();
 
-    [Parameter]
-    public EventCallback<Models.TodoItem> OnTodoAdded { get; set; }
-
-    private async Task AddTodo()
+    [Inject]
+    private Service.TodoService TodoService { get; set; } = null!;
+    private void AddTodo()
     {
-        await OnTodoAdded.InvokeAsync(newTodo);
-        newTodo = new Models.TodoItem();
+       TodoService.AddTodoItem(newTodo);
+       NavigationManager.NavigateTo("/todo");
     }
 }
