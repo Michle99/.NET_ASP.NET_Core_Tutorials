@@ -1,4 +1,3 @@
-<!-- EditTodo.razor -->
 @page "/todo/{id}"
 
 @inject Service.TodoService TodoService
@@ -26,18 +25,13 @@ else
 
 @code {
     [Parameter]
-    public int TodoId { get; set; }
+    public int Id { get; set; }
 
     private Models.TodoItem? todoItem;
 
     protected override void OnInitialized()
     {
-        LoadTodoItem();
-    }
-
-    private void LoadTodoItem()
-    {
-        todoItem = TodoService.GetTodoItem(TodoId);
+        todoItem = TodoService.GetTodoItem(Id);
     }
 
     private async Task SaveChanges()
