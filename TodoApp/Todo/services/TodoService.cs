@@ -17,7 +17,7 @@ public interface ITodoService
 
 public class TodoService : ITodoService
 {
-    private List<TodoItem> todoItems = new List<TodoItem>();
+    // private List<TodoItem> todoItems = new List<TodoItem>();
     private readonly HttpClient _httpClient;
 
     public TodoService(HttpClient httpClient)
