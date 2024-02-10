@@ -1,5 +1,9 @@
+@page "/api/todo"
+@using TodoApp.Models
+@inject TodoApp.Service.ITodoService TodoService
+@inject NavigationManager navigationManager
 
-@page "/todo"
+<PageTitle>TodoApp</PageTitle>
 
 <h3>TODO List</h3>
 
@@ -19,7 +23,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in TodoService.GetTodoItems())
+            @foreach (var item in todoItems)
             {
                 <tr>
                     <td>@item.Id</td>
@@ -39,19 +43,13 @@ else
 
 @code {
     private List<Models.TodoItem> todoItems = null!;
-
-    @inject NavigationManager navigationManager
-
-    [Inject]
-    private Service.TodoService TodoService { get; set; } = null!;
-
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        todoItems = TodoService.GetTodoItems();
+        todoItems = await TodoService.GetTodoItems();
     }
     private void AddTodoItem()
     {
-        navigationManager.NavigateTo("/todo/add");
+        navigationManager.NavigateTo("/api/todo/add");
     }
 
     private void EditTodoItem(Models.TodoItem item)
@@ -59,9 +57,9 @@ else
         navigationManager.NavigateTo($"/todo/{item.Id}");
     }
 
-    private void DeleteTodoItem(int id)
+    private async Task DeleteTodoItem(int id)
     {
-        TodoService.DeleteTodoItem(id);
-        todoItems = TodoService.GetTodoItems();
+        await TodoService.DeleteTodoItem(id);
+        todoItems = await TodoService.GetTodoItems();
     }
 }

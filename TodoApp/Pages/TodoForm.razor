@@ -1,7 +1,9 @@
 
-@page "/todo/add"
+@page "/api/todo/add"
 
-@inject NavigationManager NavigationManager
+@using TodoApp.Models
+@inject TodoApp.Service.ITodoService TodoService
+@inject NavigationManager navigationManager
 
 <h3>Add New Todo</h3>
 
@@ -20,11 +22,9 @@
 @code {
     private Models.TodoItem newTodo = new Models.TodoItem();
 
-    [Inject]
-    private Service.TodoService TodoService { get; set; } = null!;
-    private void AddTodo()
+    private async Task AddTodo()
     {
-       TodoService.AddTodoItem(newTodo);
-       NavigationManager.NavigateTo("/todo");
+       await TodoService.AddTodoItem(newTodo);
+       navigationManager.NavigateTo("/api/todo");
     }
 }

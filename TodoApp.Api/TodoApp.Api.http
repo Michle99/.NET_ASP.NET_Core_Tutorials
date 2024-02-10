@@ -10,26 +10,26 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "Title": "Adding the sixth Todo",
+    "Title": "Adding the tenth Todo",
     "IsCompleted": true
 }
 
 ### Get a Todo by ID
-GET http://localhost:5141/api/todo/3
+GET http://localhost:5141/api/todo/16
 Accept: application/json
 
 
 ### Delete a Todo
-DELETE http://localhost:5141/api/todo/4
+DELETE http://localhost:5141/api/todo/12
 Accept: application/json
 
 
 ### Update a Todo
-PUT  http://localhost:5141/api/todo/3
+PUT  http://localhost:5141/api/todo/16
 Content-Type: application/json
 Accept: application/json
 
 {
-    "Title": "Adding the thirty-third Todo",
-    "IsCompleted": true
+    "Title": "Added Tenth Todo with an ID of 16",
+    "IsCompleted": false
 }

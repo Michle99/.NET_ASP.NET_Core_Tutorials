@@ -8,11 +8,12 @@ builder.Services.AddDbContext<TodoContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TodoDatabase"))
 );
 
+builder.Services.AddControllers();
 builder.Services.AddCors(options =>
         {
-            options.AddPolicy("AllowSpecificOrigins",
+            options.AddPolicy("AllowAllOrigins",
             builder => builder
-                .WithOrigins("http://localhost:5291")
+                .WithOrigins("*")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowAnyOrigin()
@@ -20,7 +21,7 @@ builder.Services.AddCors(options =>
         }
 );
 
-builder.Services.AddControllers();
+
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -38,7 +39,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseCors("AllowSpecificOrigins");
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 

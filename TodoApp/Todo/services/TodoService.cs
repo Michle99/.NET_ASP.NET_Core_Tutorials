@@ -2,53 +2,53 @@
 
 using System.Net.Http.Json;
 using TodoApp.Models;
+using System.Threading.Tasks;
 
 namespace TodoApp.Service;
 
 public interface ITodoService
 {
-    List<TodoItem> GetTodoItems();
-    TodoItem? GetTodoItem(int id);
+   Task<List<TodoItem>> GetTodoItems();
+    Task<TodoItem> GetTodoItem(int id);
     Task<TodoItem> AddTodoItem(TodoItem item);
-    Task<TodoItem>  UpdateTodoItem(TodoItem item);
-    void DeleteTodoItem(int id);
+    Task<TodoItem> UpdateTodoItem(TodoItem item);
+    Task DeleteTodoItem(int id);
 }
 
 public class TodoService : ITodoService
 {
     private List<TodoItem> todoItems = new List<TodoItem>();
+    private readonly HttpClient _httpClient;
 
-    public List<TodoItem> GetTodoItems()
+    public TodoService(HttpClient httpClient)
     {
-        return todoItems;
+        _httpClient = httpClient;
     }
 
-    public TodoItem? GetTodoItem(int id)
+    public async Task<List<TodoItem>> GetTodoItems()
     {
-        return todoItems.Find(item => item.Id == id);
+        return await _httpClient.GetFromJsonAsync<List<TodoItem>>("api/todo");
+    }
+
+    public async Task<TodoItem> GetTodoItem(int id)
+    {
+        return await _httpClient.GetFromJsonAsync<TodoItem>($"api/todo/{id}");
     }
 
     public async Task<TodoItem> AddTodoItem(TodoItem item)
-        {
-            item.Id = todoItems.Count + 1;
-            todoItems.Add(item);
-            return await Task.FromResult(item);
-        }
-
-        public async Task<TodoItem> UpdateTodoItem(TodoItem updatedItem)
-        {
-            var existingItem = todoItems.Find(item => item.Id == updatedItem.Id);
-            if (existingItem != null)
-            {
-                existingItem.Title = updatedItem.Title;
-                existingItem.IsCompleted = updatedItem.IsCompleted;
-            }
-
-            return await Task.FromResult(existingItem);
-        }
-
-    public void DeleteTodoItem(int id)
     {
-        todoItems.RemoveAll(item => item.Id == id);
+        var response = await _httpClient.PostAsJsonAsync("api/todo", item);
+        return await response.Content.ReadFromJsonAsync<TodoItem>();
+    }
+
+    public async Task<TodoItem> UpdateTodoItem(TodoItem item)
+    {
+        var response = await _httpClient.PutAsJsonAsync($"api/todo/{item.Id}", item);
+        return await response.Content.ReadFromJsonAsync<TodoItem>();
+    }
+
+    public async Task DeleteTodoItem(int id)
+    {
+        await _httpClient.DeleteAsync($"api/todo/{id}");
     }
 }

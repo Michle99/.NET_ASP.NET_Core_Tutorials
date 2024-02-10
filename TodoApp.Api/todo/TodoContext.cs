@@ -13,11 +13,6 @@ public class TodoContext : DbContext
     }
     public DbSet<TodoItem> TodoItems { get; set; }
 
-
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddCors();
-    }
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         //* Connect to sqlite database
