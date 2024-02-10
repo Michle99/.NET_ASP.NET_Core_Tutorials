@@ -1,7 +1,7 @@
-@page "/todo/{id}"
+@page "/api/todo/{id:int}"
 
-@inject Service.TodoService TodoService
-@inject NavigationManager NavigationManager
+@inject TodoApp.Service.ITodoService TodoService
+@inject NavigationManager navigationManager
 
 <h3>Edit Todo</h3>
 
@@ -27,21 +27,21 @@ else
     [Parameter]
     public int Id { get; set; }
 
-    private Models.TodoItem? todoItem;
+    private Models.TodoItem todoItem = null!;
 
-    @* protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        todoItem = TodoService.GetTodoItem(Id);
-    } *@
+        todoItem = await TodoService.GetTodoItem(Id);
+    }
 
     private async Task SaveChanges()
     {
         await TodoService.UpdateTodoItem(todoItem);
-        NavigationManager.NavigateTo("/todo");
+        navigationManager.NavigateTo("/api/todo");
     }
 
     private void CancelEdit()
     {
-        NavigationManager.NavigateTo("/todo");
+        navigationManager.NavigateTo("/api/todo");
     }
 }

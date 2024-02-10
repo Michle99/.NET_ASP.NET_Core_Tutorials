@@ -54,7 +54,7 @@ else
 
     private void EditTodoItem(Models.TodoItem item)
     {
-        navigationManager.NavigateTo($"/todo/{item.Id}");
+        navigationManager.NavigateTo($"/api/todo/{item.Id}");
     }
 
     private async Task DeleteTodoItem(int id)
