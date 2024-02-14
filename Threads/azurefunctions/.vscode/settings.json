@@ -1,0 +1,26 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#3420a9",
+        "activityBar.background": "#3420a9",
+        "editorGroup.border": "#3420a9",
+        "panel.border": "#3420a9",
+        "sash.hoverBorder": "#3420a9",
+        "sideBar.border": "#3420a9",
+        "statusBar.background": "#27187e",
+        "statusBar.border": "#27187e",
+        "statusBar.debuggingBackground": "#6f7e18",
+        "statusBar.debuggingBorder": "#6f7e18",
+        "statusBarItem.hoverBackground": "#3420a9",
+        "statusBarItem.remoteBackground": "#27187e",
+        "tab.activeBorder": "#3420a9",
+        "titleBar.activeBackground": "#27187e",
+        "titleBar.border": "#27187e",
+        "titleBar.inactiveBackground": "#27187e99"
+    },
+    "peacock.color": "#27187E",
+    "azureFunctions.deploySubpath": "bin/Release/net8.0/publish",
+    "azureFunctions.projectLanguage": "C#",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.preDeployTask": "publish (functions)"
+}

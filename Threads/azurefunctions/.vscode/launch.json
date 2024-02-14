@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "C://Users/sammi/Downloads/DotNET/HelloWorld/bin/Debug/net8.0/HelloWorld.dll",
+            "args": [],
+            "cwd": "C://Users/sammi/Downloads/DotNET/HelloWorld/",
+            "stopAtEntry": false,
+            "console": "integratedTerminal"
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "name": "Attach to .NET Functions",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:azureFunctions.pickProcess}"
+        }
+    ]
+}
